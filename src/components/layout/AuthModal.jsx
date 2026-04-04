@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import LoginForm from "../auth/LoginForm";
+
+import RegisterForm from "../auth/RegisterForm";
+
 export default function AuthModal({ close }) {
   const [isLogin, setIsLogin] = useState(true);
 
@@ -10,34 +14,36 @@ export default function AuthModal({ close }) {
           X
         </button>
         <div className="tabs">
-          <button onClick={() => setIsLogin(true)}>Login</button>
-          <button onClick={() => setIsLogin(false)}>Register</button>
+          <button
+            className={isLogin ? "active" : ""}
+            onClick={() => {
+              console.log("Login Clicked");
+              setIsLogin(true);
+            }}
+          >
+            Login
+          </button>
+          <button
+            className={!isLogin ? "active" : ""}
+            onClick={() => {
+              console.log("Register clicked");
+              setIsLogin(false);
+            }}
+          >
+            Register
+          </button>
         </div>
-        {isLogin ? <LoginForm /> : <RegisterForm />}
+        <div className="form-container">
+          {isLogin ? (
+            <LoginForm />
+          ) : (
+            <RegisterForm
+              closeModal={close}
+              switchToLogin={() => setIsLogin(true)}
+            />
+          )}
+        </div>
       </div>
-    </div>
-  );
-}
-
-function LoginForm() {
-  return (
-    <>
-      <h2>Login</h2>
-      <input className="input" placeholder="Email" />
-      <input className="input" type="password" placeholder="Password" />
-      <button className="submit">Login</button>
-    </>
-  );
-}
-
-function RegisterForm() {
-  return (
-    <div>
-      <h2>Register</h2>
-      <input className="input" placeholder="Name" />
-      <input className="input" placeholder="Email" />
-      <input className="input" placeholder="password" />
-      <button className="submit">Register</button>
     </div>
   );
 }
