@@ -34,4 +34,22 @@ export const getSummaryByDate = (start, end) =>
 export const getCategory = (start, end) =>
   API.get(`/dashboard/category?start=${start}&end=${end}`);
 
+//for the product adding
+//Create
+
+export const createExpense = (data) => API.post("/expanses", data);
+
+//GetALl
+export const getExpenses = () => API.get("/expanses");
+
+//GET by ID
+export const getExpenseById = (id) => API.get(`/expanses/${id}`);
+
+//Update
+export const updateExpenses = (id, data) => API.post(`/expanses/${id}`, data);
+
+//delete
+
+export const deleteExpense = (id) => API.delete(`/expanses/${id}`);
+
 export default API;
