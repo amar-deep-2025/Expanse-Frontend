@@ -1,16 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/auth/ProtectRoute"; // ⚠️ spelling check
+import Expense from "./pages/Expense"; // ✅ add this
+
+import ProtectedRoute from "./components/auth/ProtectRoute"; // ⚠️ ensure name correct
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Route */}
+        {/* 🔓 Public Route */}
         <Route path="/" element={<Landing />} />
 
-        {/* Protected Route */}
+        {/* 🔐 Protected Routes */}
         <Route
           path="/dashboard"
           element={
@@ -19,6 +22,18 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/expenses"
+          element={
+            <ProtectedRoute>
+              <Expense />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ❌ 404 Page */}
+        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   );
